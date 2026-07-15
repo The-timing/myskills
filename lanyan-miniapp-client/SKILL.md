@@ -12,6 +12,7 @@ description: Use for LanYan uni-app/WeChat mini program pages, API wrappers, req
 3. Render server-computed business statuses and configuration values. Do not duplicate reward, eligibility, or permission rules in page code.
 4. Route by product/order type deliberately. A direct-exchange voucher must not pass through an unnecessary confirmation page.
 5. Keep backend error text visible long enough to read; do not replace meaningful messages with a generic short toast.
+6. Before any user-information or account-owned action, check login at the click/entry point and redirect unauthenticated users before opening forms, order pages, or submitting requests.
 
 ## Platform Checks
 
@@ -22,4 +23,4 @@ description: Use for LanYan uni-app/WeChat mini program pages, API wrappers, req
 
 ## Verify
 
-Test fresh entry, logged-in entry, failed request, no-data case, image rendering, share result, back navigation, and a real-device or simulator request trace.
+Test fresh entry, logged-in entry, unauthenticated guarded actions, failed request, no-data case, image rendering, share result, back navigation, and a real-device or simulator request trace.

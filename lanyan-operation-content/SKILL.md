@@ -24,7 +24,8 @@ description: Use for LanYan operational settings, bus_setting values, service ag
 - Treat editor initialization, visible container timing, value write-back, upload response mapping, preview, and XSS policy as one integration.
 - Initialize only after the container is visible; avoid input handlers that continuously reset editor content and move the cursor.
 - Adapt the upload response to the editor's expected protocol and retain the safe HTML tags needed by trusted admin content.
+- When an admin setting endpoint saves rich text or UEditor HTML, add that endpoint to `application.yml` `xss.excludes` so the global XSS filter does not strip trusted operational content before persistence.
 
 ## Verify
 
-Edit a setting in admin, save, reload it via the public/client API, and validate formatted text, images, phone links, numeric rules, and empty values.
+Edit a setting in admin, save, reload it via the public/client API, and validate formatted text, images, phone links, numeric rules, XSS exclude coverage, and empty values.

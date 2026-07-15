@@ -18,6 +18,7 @@ description: Use for LanYan Spring Boot, MyBatis-Plus, database schema, Entity/V
 - Use stable sorting for lists: parent/order/id or an equivalent deterministic sequence.
 - Prefer a targeted join or batch aggregate over client-side N+1 lookups.
 - Separate anonymous read endpoints, authenticated user extensions, and admin management endpoints. Do not weaken a public endpoint to support an admin action.
+- When implementing miniapp user registration, validate that the submitted phone is unique before creating the account; protect the check with a short lock when concurrent registration can reuse the same phone.
 - For multi-match upgrades, retain compatibility with the previous single-object field until callers are migrated.
 - Pair every occupancy, reservation, lock, or hold with release paths for success, failure, timeout, cancel, and retry.
 
@@ -29,4 +30,4 @@ description: Use for LanYan Spring Boot, MyBatis-Plus, database schema, Entity/V
 
 ## Verify
 
-Exercise normal, duplicate, insufficient-data, canceled, and retried requests. Confirm database rows, returned VO fields, and downstream state match.
+Exercise normal, duplicate phone, insufficient-data, canceled, and retried requests. Confirm database rows, returned VO fields, and downstream state match.
