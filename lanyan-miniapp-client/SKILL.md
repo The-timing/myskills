@@ -13,6 +13,7 @@ description: Use for LanYan uni-app/WeChat mini program pages, API wrappers, req
 4. Route by product/order type deliberately. A direct-exchange voucher must not pass through an unnecessary confirmation page.
 5. Keep backend error text visible long enough to read; do not replace meaningful messages with a generic short toast.
 6. Before any user-information or account-owned action, check login at the click/entry point and redirect unauthenticated users before opening forms, order pages, or submitting requests.
+7. When a mini-program `rich-text` field may contain HTML images, remove each `<img>`'s fixed `width`/`height` attributes and inline declarations, then set `width:100%;max-width:100%;height:auto;` inline; outer component CSS does not reliably constrain rich-text descendants on WeChat.
 
 ## Platform Checks
 
@@ -20,6 +21,7 @@ description: Use for LanYan uni-app/WeChat mini program pages, API wrappers, req
 - Keep page initial state stable while async requests complete; handle loading, empty, failure, and retry states.
 - Build sharing from the target user's ID/data, especially on team-member pages; never silently use the logged-in user's poster.
 - For specialized input such as vehicle plates, use a deliberate input mode or component rather than relying on an unsuitable generic keyboard.
+- Verify rich-text with an image wider than the viewport: it must remain within the card or page padding and preserve its aspect ratio.
 
 ## Verify
 
