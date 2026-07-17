@@ -1,28 +1,24 @@
 ---
 name: lanyan-miniapp-client
-description: Use for LanYan uni-app/WeChat mini program pages, API wrappers, request headers, static image URLs, navigation, forms, share views, toast duration, or user-facing status display. Keep client behavior aligned with backend contracts and mini-program platform constraints.
+description: 开发蓝燕 uni-app/微信小程序页面、接口封装、请求头、静态图片地址、导航、表单、分享页、Toast 时长或用户可见状态时使用。保持客户端与后端契约及小程序限制一致。
 ---
 
-# LanYan Mini Program Client
+# 蓝燕小程序客户端
 
-## Implement
+## 实现
+1. 复用项目请求封装，从统一位置获取域名、请求头、鉴权和错误处理。
+2. 图片契约只定义一次：后端返回相对或绝对地址，客户端只在需要时补一次前缀。
+3. 直接渲染服务端计算的状态和配置，不在页面复制奖励、资格或权限规则。
+4. 按产品/订单类型明确路由，直兑券不经过无意义确认页。
+5. 后端错误文本展示足够时间，不用通用短 Toast 覆盖有效提示。
+6. 涉及用户信息或账户归属操作时，在点击入口校验登录。
+7. 富文本图片移除固定宽高，并内联 `width:100%;max-width:100%;height:auto;`。
 
-1. Reuse the project's request wrapper and obtain base URLs, headers, auth, and error handling from one place.
-2. Define the image contract once: backend returns relative paths or absolute URLs; the client prefixes only when required and never twice.
-3. Render server-computed business statuses and configuration values. Do not duplicate reward, eligibility, or permission rules in page code.
-4. Route by product/order type deliberately. A direct-exchange voucher must not pass through an unnecessary confirmation page.
-5. Keep backend error text visible long enough to read; do not replace meaningful messages with a generic short toast.
-6. Before any user-information or account-owned action, check login at the click/entry point and redirect unauthenticated users before opening forms, order pages, or submitting requests.
-7. When a mini-program `rich-text` field may contain HTML images, remove each `<img>`'s fixed `width`/`height` attributes and inline declarations, then set `width:100%;max-width:100%;height:auto;` inline; outer component CSS does not reliably constrain rich-text descendants on WeChat.
+## 平台检查
+- 使用 HTTPS 资源，静态路径保持可配置。
+- 异步期间保持初始状态稳定，处理加载、空、失败和重试。
+- 分享使用目标用户/业务数据，不静默使用当前登录用户数据。
+- 车牌等专用输入使用专门模式或组件。
 
-## Platform Checks
-
-- Use HTTPS-compatible remote resources and keep static resource paths configurable.
-- Keep page initial state stable while async requests complete; handle loading, empty, failure, and retry states.
-- Build sharing from the target user's ID/data, especially on team-member pages; never silently use the logged-in user's poster.
-- For specialized input such as vehicle plates, use a deliberate input mode or component rather than relying on an unsuitable generic keyboard.
-- Verify rich-text with an image wider than the viewport: it must remain within the card or page padding and preserve its aspect ratio.
-
-## Verify
-
-Test fresh entry, logged-in entry, unauthenticated guarded actions, failed request, no-data case, image rendering, share result, back navigation, and a real-device or simulator request trace.
+## 验证
+测试首次进入、登录/未登录、失败请求、空数据、图片、分享、返回导航和真机请求链路。

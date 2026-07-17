@@ -1,6 +1,6 @@
 ---
 name: extracting-prototype-requirements
-description: Use when reviewing Lanhu, Modao, Axure, Figma prototypes, prototype screenshots, page trees, design annotations, or when converting them into product requirements, development documentation, menus, APIs, or implementation tasks.
+description: 审阅蓝湖、墨刀、Axure、Figma 原型、原型截图、页面树或设计批注，或将其转化为产品需求、开发文档、菜单、接口和实现任务时使用。
 ---
 
 # 主动提取原型需求

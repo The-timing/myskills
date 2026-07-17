@@ -1,33 +1,29 @@
 ---
 name: lanyan-backend-data
-description: Use for LanYan Spring Boot, MyBatis-Plus, database schema, Entity/VO/DTO, Mapper, Service, Controller, join query, public API, authentication boundary, callback, or business-state implementation. Apply project-style layering and protect data contracts from schema to response.
+description: 开发蓝燕 Spring Boot、MyBatis-Plus、数据库结构、Entity/VO/DTO、Mapper、Service、Controller、关联查询、公开接口、鉴权边界、回调或业务状态时使用。遵循项目分层并保护数据契约。
 ---
 
-# LanYan Backend And Data
+# 蓝燕后端与数据
 
-## Build In Layers
+## 分层实现
+1. 确认表字段、默认值、索引、迁移 SQL 和历史数据兼容性。
+2. 实体只保留真实列；计算、关联和界面字段标记为非持久化。
+3. 通过 VO/DTO 向客户端和后台输出数据；名称、标签、数量由服务端聚合。
+4. 校验、幂等、状态流转、流水和副作用放在 Service。
+5. Controller 只处理鉴权与请求响应；Mapper 只处理数据访问。
 
-1. Confirm table fields, defaults, indexes, migration SQL, and historical-data compatibility.
-2. Keep persistence entities limited to real columns. Mark calculated, joined, or UI-only fields as non-persistent.
-3. Expose client/admin data through VO or DTO; aggregate names, labels, and counts on the server.
-4. Put validation, idempotency, state changes, ledger writes, and business side effects in a service method.
-5. Let controllers handle request/response and permissions only; mapper methods handle data access only.
+## 查询与接口规则
+- 列表使用稳定排序：父级/排序/ID 或同等确定顺序。
+- 优先关联查询或批量聚合，避免客户端 N+1 查询。
+- 匿名读取、已登录用户能力和后台管理接口必须分离。
+- 小程序注册需校验手机号唯一性，并发时使用短锁保护。
+- 多匹配升级保留旧单对象字段直到调用方迁移完成。
+- 占用、预约、锁定必须有成功、失败、超时、取消和重试释放路径。
 
-## Query And API Rules
+## 回调规则
+- 先校验签名和授权，再处理业务数据。
+- 以唯一业务键和状态判断保证重复回调安全。
+- 主事务保持短小；慢通知和补充动作在提交后以可重试方式执行。
 
-- Use stable sorting for lists: parent/order/id or an equivalent deterministic sequence.
-- Prefer a targeted join or batch aggregate over client-side N+1 lookups.
-- Separate anonymous read endpoints, authenticated user extensions, and admin management endpoints. Do not weaken a public endpoint to support an admin action.
-- When implementing miniapp user registration, validate that the submitted phone is unique before creating the account; protect the check with a short lock when concurrent registration can reuse the same phone.
-- For multi-match upgrades, retain compatibility with the previous single-object field until callers are migrated.
-- Pair every occupancy, reservation, lock, or hold with release paths for success, failure, timeout, cancel, and retry.
-
-## Callback Rules
-
-- Verify signature and authorization before processing business data.
-- Make duplicate callbacks safe with a unique business key and idempotent state checks.
-- Keep the primary transaction short. Trigger slow external notifications or supplemental actions after commit and with retry-safe handling.
-
-## Verify
-
-Exercise normal, duplicate phone, insufficient-data, canceled, and retried requests. Confirm database rows, returned VO fields, and downstream state match.
+## 验证
+覆盖正常、重复、数据不足、取消和重试；核对数据库、VO 返回和下游状态。

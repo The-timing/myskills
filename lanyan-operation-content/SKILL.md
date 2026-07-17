@@ -1,31 +1,31 @@
 ---
 name: lanyan-operation-content
-description: Use for LanYan operational settings, bus_setting values, service agreements, privacy policy, platform introduction, points rules, customer-service information, team parameters, rich text, or UEditor. Keep runtime business content editable in admin and consistently rendered by clients.
+description: 开发蓝燕运营设置、bus_setting 值、服务协议、隐私政策、平台介绍、积分规则、客服信息、团队参数、富文本或 UEditor 时使用。保证运行期业务内容可在后台维护并在客户端一致渲染。
 ---
 
-# LanYan Operations And Content
+# 蓝燕运营与内容
 
-## Split Configuration By Ownership
+## 按归属划分配置
 
-- Put operator-managed business content and runtime rules in grouped settings with a stable `groupKey` and `valueKey`.
-- Put third-party credentials and deployment secrets in system configuration or environment variables.
-- Put project build/static defaults in code configuration.
-- Let the mini program and H5 consume a published configuration result, not configuration schema logic.
+- 将运营维护的业务内容和运行规则放入具备稳定 `groupKey`、`valueKey` 的分组设置。
+- 将第三方凭证和部署密钥放入系统配置或环境变量。
+- 将项目构建/静态默认值放入代码配置。
+- 小程序和 H5 只消费已发布的配置结果，不消费配置表结构逻辑。
 
-## Build The Admin Surface
+## 构建后台操作界面
 
-1. Use clear operation-oriented groups such as account, team, contact, agreement, prize rule, and platform introduction.
-2. Match input controls to value type: numeric inputs for amounts, image upload for QR/image fields, and rich text for articles.
-3. Show only fields belonging to the selected group; do not expose developer-only settings as generic CRUD.
-4. Supply empty-value fallback behavior for client pages.
+1. 使用账户、团队、联系信息、协议、奖励规则、平台介绍等清晰的运营分组。
+2. 控件匹配值类型：金额使用数字输入，二维码/图片使用上传，文章使用富文本。
+3. 仅显示所选分组字段；不得将开发专用设置暴露为通用 CRUD。
+4. 为客户端页面提供空值兜底行为。
 
-## Rich Text / UEditor
+## 富文本 / UEditor
 
-- Treat editor initialization, visible container timing, value write-back, upload response mapping, preview, and XSS policy as one integration.
-- Initialize only after the container is visible; avoid input handlers that continuously reset editor content and move the cursor.
-- Adapt the upload response to the editor's expected protocol and retain the safe HTML tags needed by trusted admin content.
-- When an admin setting endpoint saves rich text or UEditor HTML, add that endpoint to `application.yml` `xss.excludes` so the global XSS filter does not strip trusted operational content before persistence.
+- 将编辑器初始化、容器可见时机、值回写、上传响应映射、预览和 XSS 策略作为一个整体。
+- 仅在容器可见后初始化；避免持续重置内容和移动光标的输入处理器。
+- 上传响应适配编辑器协议，保留可信后台内容所需安全 HTML 标签。
+- 后台设置接口保存富文本或 UEditor HTML 时，将其加入 `application.yml` 的 `xss.excludes`，避免全局过滤器在持久化前截断可信内容。
 
-## Verify
+## 验证
 
-Edit a setting in admin, save, reload it via the public/client API, and validate formatted text, images, phone links, numeric rules, XSS exclude coverage, and empty values.
+在后台编辑并保存设置，再通过公开/客户端接口重新读取，验证格式文本、图片、电话链接、数值规则、XSS 排除和空值。

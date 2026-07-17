@@ -1,28 +1,28 @@
 ---
 name: lanyan-experience-intake
-description: Use when the user asks to summarize lessons, record a bug pattern, improve the personal skill library, prevent a repeated problem, or turn project knowledge into reusable CC Switch/Claude skills. Consolidate experience into the smallest relevant LanYan skill without duplicating triggers or bloating context.
+description: 用户要求总结经验、记录缺陷模式、改进个人技能库、防止问题重复发生，或将项目知识沉淀为可复用 CC Switch/Claude 技能时使用。将经验归入最小相关的蓝燕技能，不重复触发条件或膨胀上下文。
 ---
 
-# LanYan Experience Intake
+# 蓝燕经验沉淀
 
-## Capture A Reusable Lesson
+## 提炼可复用经验
 
-Record only information that changes future decisions:
+只记录会改变未来决策的信息：
 
-1. Trigger: the user wording, symptom, or technical condition that should activate the lesson.
-2. Root cause: the specific mistaken assumption or missing boundary.
-3. Guardrail: a short rule that prevents recurrence.
-4. Verification: the observable check that proves the rule was applied.
+1. 触发条件：应启用该经验的用户表述、症状或技术条件。
+2. 根因：具体错误假设或缺失边界。
+3. 护栏：防止重复发生的一条简短规则。
+4. 验证：可观察、可证明规则已执行的检查。
 
-## Maintain The Library
+## 维护技能库
 
-- Search the existing `lanyan-*` skill first and update the one that owns the workflow.
-- Prefer one concise rule over a new skill when the trigger already belongs to an existing domain.
-- Create a new skill only for a distinct recurring domain with a different trigger and workflow.
-- Keep triggering examples in frontmatter descriptions; keep procedural checks in the body.
-- Move raw notes, old versions, and long evidence into `_archive`; never leave them as active skills.
-- Keep third-party/public skills unchanged unless the user explicitly requests their modification.
+- 先搜索已有 `lanyan-*` 技能，并更新负责该流程的技能。
+- 触发条件已属于现有领域时，优先补一条简洁规则，不新建技能。
+- 仅在存在不同触发条件和流程的独立重复领域时新建技能。
+- 触发示例放在 frontmatter 描述中，操作检查放在正文。
+- 原始笔记、旧版本和长证据移入 `_archive`，不得保留为活跃技能。
+- 除非用户明确要求，不修改第三方或公共技能。
 
-## Quality Gate
+## 质量检查
 
-Before adding a lesson, ask: does it overlap with a current skill, can it be stated in one actionable sentence, and does it include a verifiable outcome? Merge or discard it when the answer is no.
+新增经验前检查：是否与现有技能重叠、能否用一句可执行规则表述、是否包含可验证结果；任一答案为否时合并或舍弃。

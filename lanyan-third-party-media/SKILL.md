@@ -1,25 +1,25 @@
 ---
 name: lanyan-third-party-media
-description: Use for LanYan third-party callbacks, request signing, authorization headers, WeChat Pay/refund/transfer, logistics submission, uploads, remote images, share posters, QR/image generation, bundled fonts, or production media verification. Validate external contracts exactly and verify the rendered output, not only code paths.
+description: 开发蓝燕第三方回调、请求签名、鉴权请求头、微信支付/退款/转账、物流提交、上传、远程图片、分享海报、二维码或图片生成、内置字体或生产媒体验证时使用。精确校验外部契约，并验证真实渲染结果而非只检查代码路径。
 ---
 
-# LanYan Third-Party And Media
+# 蓝燕第三方与媒体
 
-## External Contract
+## 外部契约
 
-1. Compare method, URL, exact header format, timestamp/nonce/sequence, request body, encoding, and signature input with the provider documentation.
-2. Keep signing/callback verification separate from business processing and record enough safe diagnostics to identify mismatches.
-3. Select WeChat payment/refund/transfer protocol from available certificates, account capability, and provider prerequisites; do not mix V2 and V3 conventions.
-4. Assemble logistics requests from the provider's actual order-key and delivery-mode requirements, omitting unsupported optional fields.
+1. 对照服务商文档逐项校验请求方法、URL、精确请求头格式、时间戳/随机数/序列号、请求体、编码方式和签名原文。
+2. 将签名或回调验签与业务处理分离，并记录足够且不泄露敏感信息的诊断日志，以便定位契约不匹配问题。
+3. 根据证书、商户能力和服务商前置条件选择微信支付/退款/转账协议，不得混用 V2 与 V3 规范。
+4. 按服务商实际要求的订单标识与配送方式组装物流请求，省略其不支持的可选字段。
 
-## Upload And Image Contract
+## 上传与图片契约
 
-- Decide whether upload APIs return a relative path or absolute URL. Prefix domains in exactly one layer.
-- When moving static assets online, replace client references consistently and verify HTTPS accessibility.
-- Generate a missing share poster from the target user/product data, persist its path, and regenerate only under an explicit invalidation rule.
-- Bundle a known font with server-side poster generation; do not depend on an operating-system font.
-- Compare poster output to the live background and reference image for dimensions, crop, whitespace, text, QR code, and cache behavior.
+- 明确上传接口返回相对路径还是绝对 URL，域名前缀只能在一个层级统一补齐。
+- 将静态资源迁移到线上时，同步替换所有客户端引用并验证 HTTPS 可访问性。
+- 根据目标用户或商品数据生成缺失的分享海报，持久化其路径，且仅在明确的失效规则下重新生成。
+- 服务端生成海报时随应用打包确定的字体，不依赖操作系统字体。
+- 对照线上背景图和参考图校验海报的尺寸、裁剪、留白、文字、二维码及缓存表现。
 
-## Verify
+## 验证
 
-Use an actual provider-style request or sandbox callback where available. Open the returned image URL, inspect its real pixels/content, and confirm the client renders the same resource.
+在条件允许时使用真实服务商格式的请求或沙箱回调验证。打开返回的图片 URL，检查实际像素与内容，并确认客户端渲染的是同一份资源。

@@ -9,7 +9,7 @@ metadata:
 
 # MCP 服务器构建
 
-系统化设计、实现、测试和部署 Model Context Protocol 服务器的方法论。
+系统化设计、实现、测试和部署模型上下文协议（Model Context Protocol）服务器的方法论。
 
 ## 1. 协议核心概念
 
@@ -236,7 +236,7 @@ server.sendLoggingMessage({ level: "info", data: "处理中" });
 ## 10. 构建检查清单
 
 ### 设计
-- [ ] 明确 Tools vs Resources vs Prompts 分工
+- [ ] 明确工具、资源与提示词模板的分工
 - [ ] Tool 命名 `动词_名词`，描述说明用途和返回内容
 - [ ] 参数简洁，可选参数有合理默认值
 

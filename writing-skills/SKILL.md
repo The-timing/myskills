@@ -100,15 +100,15 @@ skills/
 - 总计最多 1024 字符
 - `name`：只使用字母、数字和连字符（不要用括号、特殊字符）
 - `description`：第三人称，仅描述何时使用（不是做什么）
-  - 以"Use when..."开头，聚焦于触发条件
+  - 以第三人称动词短语开头，聚焦于触发条件
   - 包含具体的症状、场景和上下文
   - **绝不总结技能的流程或工作流**（参见 CSO 章节了解原因）
   - 尽量控制在 500 字符以内
 
 ```markdown
 ---
-name: Skill-Name-With-Hyphens
-description: Use when [具体的触发条件和症状]
+name: skill-name-with-hyphens
+description: 在[具体触发条件和症状]时使用
 ---
 
 # 技能名称
@@ -148,7 +148,7 @@ description: Use when [具体的触发条件和症状]
 
 **目的：** Claude 读取描述来决定为当前任务加载哪些技能。让它能回答："我现在应该读这个技能吗？"
 
-**格式：** 以"Use when..."开头，聚焦于触发条件
+**格式：** 使用第三人称动词短语，聚焦于触发条件
 
 **关键：描述 = 何时使用，不是技能做什么**
 
@@ -162,16 +162,16 @@ description: Use when [具体的触发条件和症状]
 
 ```yaml
 # 错误：总结了工作流 - Claude 可能会跟随描述而非阅读技能
-description: Use when executing plans - dispatches subagent per task with code review between tasks
+description: 执行计划时为每个任务分派子智能体，并在任务之间进行代码审查
 
 # 错误：流程细节太多
-description: Use for TDD - write test first, watch it fail, write minimal code, refactor
+description: 使用 TDD：先写测试并观察失败，再写最小代码并重构
 
 # 正确：只有触发条件，无工作流摘要
-description: Use when executing implementation plans with independent tasks in the current session
+description: 在当前会话中执行包含独立任务的实现计划时使用
 
 # 正确：仅触发条件
-description: Use when implementing any feature or bugfix, before writing implementation code
+description: 实现任意功能或修复缺陷、且尚未开始编写实现代码时使用
 ```
 
 **内容：**
@@ -184,19 +184,19 @@ description: Use when implementing any feature or bugfix, before writing impleme
 
 ```yaml
 # 错误：太抽象、模糊，未包含何时使用
-description: For async testing
+description: 用于异步测试
 
 # 错误：第一人称
-description: I can help you with async tests when they're flaky
+description: 我可以在异步测试不稳定时提供帮助
 
 # 错误：提到了技术但技能并非该技术特定的
-description: Use when tests use setTimeout/sleep and are flaky
+description: 测试使用 setTimeout 或 sleep 且表现不稳定时使用
 
-# 正确：以"Use when"开头，描述问题，无工作流
-description: Use when tests have race conditions, timing dependencies, or pass/fail inconsistently
+# 正确：描述问题，无工作流
+description: 测试存在竞态条件、时序依赖或通过失败不一致时使用
 
 # 正确：技术特定的技能带有明确的触发条件
-description: Use when using React Router and handling authentication redirects
+description: 使用 React Router 并处理认证重定向时使用
 ```
 
 ### 2. 关键词覆盖
@@ -530,7 +530,7 @@ pptx/
 在描述中添加：你即将违反规则时的症状：
 
 ```yaml
-description: use when implementing any feature or bugfix, before writing implementation code
+description: 实现任意功能或修复缺陷、且尚未开始编写实现代码时使用
 ```
 
 ## 技能的红-绿-重构

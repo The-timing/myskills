@@ -1,30 +1,30 @@
 ---
 name: lanyan-team-operations
-description: Use for LanYan teams, small/large team capacity, member lists, rewards, recharge targets, monthly settlement, promotion eligibility, announcement generation, birthday notices, scheduled jobs, or team status indicators. Keep rules configurable, calculations server-owned, and time/event triggers idempotent.
+description: 开发蓝燕团队、小/大团队容量、成员列表、奖励、充值目标、月度结算、晋升资格、公告生成、生日通知、定时任务或团队状态指标时使用。保持规则可配置、计算由服务端负责、时间与事件触发具备幂等性。
 ---
 
-# LanYan Team Operations
+# 蓝燕团队运营
 
-## Rule Ownership
+## 规则归属
 
-- Read team capacity, monthly recharge target, and reward points from admin-managed settings.
-- Calculate team qualification, reduction, suspension, restoration, and status color on the backend.
-- Expose a final status and reason for the client to display; do not ask the client to infer eligibility from scattered fields.
+- 从后台维护的设置读取团队容量、月充值目标和奖励积分。
+- 在后端计算团队资格、降级、暂停、恢复和状态颜色。
+- 向客户端输出最终状态和原因；不得让客户端从零散字段推断资格。
 
-## Team Membership
+## 团队成员
 
-- In a user's own small team, place that user first when the business view requires it.
-- Use the selected member's identity for member details and poster generation.
-- Enforce capacity when joining and provide operator actions such as member removal only where rules permit.
+- 用户自己的小团队在业务视图需要时将该用户置顶。
+- 成员详情和海报生成使用被选成员身份。
+- 加入时校验容量，仅在规则允许时提供移除成员等操作。
 
-## Settlement And Notices
+## 结算与通知
 
-1. Make monthly settlement idempotent per team/month/reward type.
-2. At month start, settle rewards and reset the required monthly accumulation fields.
-3. At year start, reset birthday-gift eligibility.
-4. Generate birthday and full-team upgrade announcements both from scheduled reconciliation and the immediate registration/team event.
-5. Deduplicate announcements by type, business object/user, and date or event key.
+1. 按团队/月/奖励类型保证月结算幂等。
+2. 月初结算奖励并重置必要的月累计字段。
+3. 年初重置生日礼资格。
+4. 定时核对和即时注册/团队事件都生成生日及全团队升级公告。
+5. 按类型、业务对象/用户和日期或事件键去重公告。
 
-## Verify
+## 验证
 
-Cover qualifying, first failure, reduced reward, promotion suspension, restored qualification, capacity boundary, manual reopen, scheduler rerun, and immediate event generation.
+覆盖资格达成、首次失败、奖励降级、晋升暂停、资格恢复、容量边界、人工重开、定时器重跑和即时事件生成。

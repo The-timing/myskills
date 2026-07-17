@@ -1,4 +1,4 @@
 interface:
-  display_name: "API Object Contracts"
-  short_description: "Use objects for complex API input and output."
-  default_prompt: "Apply the API object contract rule to this interface change."
+  display_name: "接口对象约定"
+  short_description: "为复杂接口请求与响应使用具名对象。"
+  default_prompt: "请按接口对象约定整理这次接口变更。"

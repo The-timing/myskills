@@ -157,21 +157,21 @@ python scripts/migrate.py --verify --backup
 
 **好的命名示例（动名词形式）**：
 
-* "Processing PDFs"
-* "Analyzing spreadsheets"
-* "Managing databases"
-* "Testing code"
-* "Writing documentation"
+* "处理 PDF 文件"
+* "分析电子表格"
+* "管理数据库"
+* "测试代码"
+* "编写文档"
 
 **可接受的替代方案**：
 
-* 名词短语："PDF Processing"、"Spreadsheet Analysis"
-* 动作导向："Process PDFs"、"Analyze Spreadsheets"
+* 名词短语："PDF 处理"、"电子表格分析"
+* 动作导向："处理 PDF"、"分析电子表格"
 
 **避免**：
 
-* 模糊的名称："Helper"、"Utils"、"Tools"
-* 过于通用："Documents"、"Data"、"Files"
+* 模糊的名称："助手"、"工具集"、"工具"
+* 过于通用："文档"、"数据"、"文件"
 * 技能集合中命名模式不一致
 
 一致的命名便于：
@@ -188,9 +188,9 @@ python scripts/migrate.py --verify --backup
 <Warning>
   **始终用第三人称写**。描述被注入系统提示中，不一致的人称视角会导致发现问题。
 
-  * **好的：** "Processes Excel files and generates reports"
-  * **避免：** "I can help you process Excel files"
-  * **避免：** "You can use this to process Excel files"
+  * **好的：** "分析 Excel 文件并生成报告时使用"
+  * **避免：** "我可以帮助你处理 Excel 文件"
+  * **避免：** "你可以用它处理 Excel 文件"
 </Warning>
 
 **具体且包含关键术语**。同时包含技能做什么和何时使用的具体触发条件/上下文。
@@ -202,33 +202,33 @@ python scripts/migrate.py --verify --backup
 **PDF 处理技能：**
 
 ```yaml  theme={null}
-description: Extract text and tables from PDF files, fill forms, merge documents. Use when working with PDF files or when the user mentions PDFs, forms, or document extraction.
+description: 处理 PDF 文件、表单填写、文档合并或用户提到 PDF、表单和文档提取时使用。
 ```
 
 **Excel 分析技能：**
 
 ```yaml  theme={null}
-description: Analyze Excel spreadsheets, create pivot tables, generate charts. Use when analyzing Excel files, spreadsheets, tabular data, or .xlsx files.
+description: 分析 Excel 文件、电子表格、表格数据或 .xlsx 文件，以及创建透视表和图表时使用。
 ```
 
 **Git 提交助手技能：**
 
 ```yaml  theme={null}
-description: Generate descriptive commit messages by analyzing git diffs. Use when the user asks for help writing commit messages or reviewing staged changes.
+description: 用户需要编写提交信息或审查暂存变更时，通过分析 Git diff 生成描述性提交信息。
 ```
 
 避免模糊的描述：
 
 ```yaml  theme={null}
-description: Helps with documents
+description: 处理文档
 ```
 
 ```yaml  theme={null}
-description: Processes data
+description: 处理数据
 ```
 
 ```yaml  theme={null}
-description: Does stuff with files
+description: 处理文件相关事项
 ```
 
 ### 渐进式披露模式
@@ -662,26 +662,26 @@ v1 API 使用：`api.example.com/v1/messages`
 ```
 feat(auth): implement JWT-based authentication
 
-Add login endpoint and token validation middleware
+添加登录接口和令牌校验中间件
 ```
 
 **示例 2：**
 输入：修复了报告中日期显示不正确的 bug
 输出：
 ```
-fix(reports): correct date formatting in timezone conversion
+fix(报告): 修正时区转换中的日期格式
 
-Use UTC timestamps consistently across report generation
+在全部报告生成流程中统一使用 UTC 时间戳
 ```
 
 **示例 3：**
 输入：更新了依赖并重构了错误处理
 输出：
 ```
-chore: update dependencies and refactor error handling
+chore: 更新依赖并重构错误处理
 
-- Upgrade lodash to 4.17.21
-- Standardize error response format across endpoints
+- 将 lodash 升级至 4.17.21
+- 统一各接口的错误响应格式
 ```
 
 遵循此风格：type(scope): 简短描述，然后详细说明。

@@ -1,27 +1,24 @@
 ---
 name: lanyan-delivery-guardrails
-description: Use for LanYan/RuoYi business changes or production fixes spanning database, Spring Boot, Vue2 ElementUI admin, uni-app mini program, H5, uploads, screenshots, curl requests, or live error reports. Map the complete business chain, trace every field and state, and verify the actual operator and user flows before completion.
+description: 处理跨数据库、Spring Boot、Vue2 ElementUI 后台、uni-app 小程序、H5、上传、截图、curl 请求或线上报错的蓝燕/若依业务改动与生产修复时使用。梳理完整业务链路并验证真实流程。
 ---
 
-# LanYan Delivery Guardrails
+# 蓝燕交付护栏
 
-## Execute
+## 执行
+1. 将需求、截图、表格、curl 和报错拆为编号验收项。
+2. 映射 `SQL → Entity/Mapper → Service → Controller/VO → 后台 → 客户端 → 用户结果`。
+3. 明确每个变更字段的维护者、返回方、展示方和提交方。
+4. 编码前检查数据库结构和已部署 SQL。
+5. 同一业务链路一次交付所有受影响端。
+6. 用最短真实路径验证：后台维护、接口读取、客户端使用、结果确认。
 
-1. Turn each request, screenshot, table row, curl sample, and error into a numbered acceptance item.
-2. Map the object across `SQL -> Entity/Mapper -> Service -> Controller/VO -> admin API/view -> mini program/H5 view -> user result`.
-3. For every changed field, state who maintains it, who returns it, who displays it, and who submits it.
-4. Check schema and deployed SQL before coding. Do not add a mapper field that the target database lacks.
-5. Change every affected surface in one delivery; do not stop after a backend-only or page-only change when the business path crosses surfaces.
-6. Verify with the shortest real path: create or edit data in admin, read it through the API, use it on the client, then confirm the final state and messages.
+## 护栏
+- 截图、线上表、URL 和日志是证据，不是猜测。
+- 后台列表应返回业务标签和聚合值，不把外键 ID 当作可用信息。
+- 状态流转和副作用必须集中在一个 Service 入口。
+- 核心流程必须有后端校验和兜底。
+- DDL 暂不能部署时，提供可运行兜底和独立升级 SQL。
 
-## Guardrails
-
-- Treat screenshots, online tables, curl, production URLs, and logs as evidence, not hints. Link each to a concrete diagnosis or unresolved item.
-- Return business labels and aggregates in a VO; do not make an admin list show foreign-key IDs as its usable value.
-- Put business state transitions and side effects in one service-layer entry point. Test and production entrances must reuse it.
-- Use backend validation and fallbacks for essential flows. The client must not be the only guardian of a rule.
-- When DDL cannot be deployed immediately, keep the release runnable with an explicit fallback and provide a separate upgrade SQL.
-
-## Finish
-
-Report completed items, executed checks, and any item that still needs deployment, data repair, or real-device verification.
+## 收尾
+说明完成项、已执行检查，以及仍需部署、数据修复或真机验证的事项。

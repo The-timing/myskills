@@ -1,31 +1,31 @@
 ---
 name: lanyan-commerce-orders
-description: Use for LanYan product types, SKU, vouchers, charging coupons, product categories, points redemption, zero-price orders, payment success, inventory, order details, or points ledger changes. Model type-specific fields and complete every order path consistently across admin, backend, and mini program.
+description: 开发蓝燕产品类型、SKU、代金券、充值券、产品分类、积分兑换、零元订单、支付成功、库存、订单详情或积分流水变更时使用。按产品类型建模，并在后台、后端和小程序中完整一致地实现订单流程。
 ---
 
-# LanYan Commerce And Orders
+# 蓝燕商品与订单
 
-## Model By Product Type
+## 按产品类型建模
 
-- Require SKU only for product types that actually select a specification.
-- Keep product main image, carousel images, and SKU images distinct.
-- Let vouchers/charging coupons use the shortest valid exchange path; do not force confirmation data that has no business meaning.
-- Define a single source of truth for type, price/points, stock, delivery/benefit, and order status.
+- 仅对确实需要选择规格的产品类型要求 SKU。
+- 区分产品主图、轮播图和 SKU 图片。
+- 代金券、充值券使用最短的有效兑换流程；不要强制填写没有业务意义的确认信息。
+- 产品类型、价格/积分、库存、交付/权益和订单状态必须有唯一事实来源。
 
-## Category Rules
+## 分类规则
 
-- Store hierarchy with a real parent field and deploy it before querying it.
-- First-level categories own entry images; second-level categories normally own name, order, status, and parent only.
-- Use deterministic parent/order/id ordering and pass the correct level's category ID to product queries.
+- 使用真实父级字段保存层级，并在查询前部署对应字段。
+- 一级分类维护入口图片；二级分类通常只维护名称、排序、状态和父级。
+- 使用稳定的父级/排序/ID 顺序，并向产品查询传入正确层级的分类 ID。
 
-## Complete The Transaction
+## 完成交易流程
 
-1. Preview eligibility and balance.
-2. Create the order safely with stock/balance validation.
-3. For direct exchange or zero-price success, call the same service-level success handler as the corresponding paid flow.
-4. Update status, deduct/write points ledger, grant the coupon/benefit, and record audit information atomically where possible.
-5. Return an actionable message and route to the appropriate success state.
+1. 预览资格与余额。
+2. 校验库存/余额后安全创建订单。
+3. 直接兑换或零元成功时，调用与对应支付流程相同的服务层成功处理器。
+4. 尽可能原子地更新状态、扣减或写入积分流水、发放券/权益并记录审计信息。
+5. 返回可操作的提示，并跳转到正确的成功状态。
 
-## Verify
+## 验证
 
-Test normal SKU goods and voucher goods separately, including insufficient points, repeated submission, stock boundary, success page, order record, and ledger/benefit record.
+分别测试普通 SKU 商品与代金券商品，包括积分不足、重复提交、库存边界、成功页、订单记录和流水/权益记录。

@@ -1,6 +1,6 @@
 ---
 name: facesss-skin-indicator-codes
-description: Use when editing Facesss skin assessment SQL, third-party SPI mappings, result rules, assessment items, report output, or indicator validation.
+description: 修改 Facesss 测肤 SQL、第三方 SPI 映射、结果规则、测肤指标快照、报告输出或指标校验时使用。
 ---
 
 # Facesss 测肤指标编码

@@ -219,7 +219,7 @@ C) 现在写测试（30 分钟），然后提交
 ### 4. 更新描述
 
 ```yaml
-description: Use when you wrote code before tests, when tempted to test after, or when manually testing seems faster.
+description: 已先于测试编写代码、想补写测试，或认为手工测试更快时使用。
 ```
 
 添加即将违规的症状。
