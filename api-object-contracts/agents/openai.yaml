@@ -1,0 +1,4 @@
+interface:
+  display_name: "API Object Contracts"
+  short_description: "Use objects for complex API input and output."
+  default_prompt: "Apply the API object contract rule to this interface change."

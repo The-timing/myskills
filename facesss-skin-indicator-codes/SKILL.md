@@ -1,0 +1,32 @@
+---
+name: facesss-skin-indicator-codes
+description: Use when editing Facesss skin assessment SQL, third-party SPI mappings, result rules, assessment items, report output, or indicator validation.
+---
+
+# Facesss 测肤指标编码
+
+第三方检测指标是固定的闭集。数据库中的 indicator_code 使用 tinyint，只能使用下表编码。
+
+| 编码 | 指标 |
+| --- | --- |
+| 0 | 毛孔 |
+| 1 | 皱纹 |
+| 2 | 痘痘 |
+| 3 | 黑眼圈 |
+| 4 | 油光 |
+| 5 | 敏感 |
+| 6 | 黑头 |
+| 7 | 暗沉 |
+| 8 | 眼袋 |
+
+## 规则
+
+- 只保存和返回 0 至 8；其他编码不得写入指标快照或结果规则。
+- 结果规则按 indicator_code、start_score、end_score 定义区间；同一指标区间不得重叠。
+- 指标名称、严重度、建议和推荐产品必须随本次测肤写入快照，历史报告不得因后续规则修改而变化。
+- 不得使用旧的 1 至 10 编码、色斑、肤色、U 区油分或 T 区油分映射。
+
+## 检查
+
+- SQL 字段注释、Service 校验、后台规则表和公开接口均使用同一映射。
+- 验证 SPI 返回的 0 至 8 各能生成一条指标快照；其他值不能进入报告。
